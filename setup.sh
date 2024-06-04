@@ -24,11 +24,9 @@ check_ssh() {
 # Lê o arquivo .env e exporta as variáveis de ambiente
 read_env() {
   if [ ! -f ".env" ]; then
-    echo "Arquivo .env não encontrado."
     return 0
   fi
 
-  echo "Lendo .env"
   while read -r LINE; do
     CLEANED_LINE=$(echo "$LINE" | awk '{$1=$1};1' | tr -d '\r')
 
@@ -38,11 +36,19 @@ read_env() {
   done < ".env"
 }
 
+# Verifica se as variáveis de ambiente EMAIL e DOMAIN estão definidas
+check_env() {
+  if [ -z "$EMAIL" ] || [ -z "$DOMAIN" ]; then
+    echo "Por favor, defina as variáveis de ambiente EMAIL e DOMAIN."
+    exit 1
+  fi
+}
+
 check_docker
 
 check_ssh
 
-read_env
+read_env && check_env
 
 # Inicia o serviço do Traefik (proxy reverso)
 docker network create traefik
