@@ -44,7 +44,6 @@ Adicionar a chave SSH à sua conta GitHub:
 3. Copie o conteúdo da sua chave **pública** e adicione à sua conta GitHub:
 
 ```bash
-Copy code
 cat ~/.ssh/id_ed25519.pub
 ```
 
