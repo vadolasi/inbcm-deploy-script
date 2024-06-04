@@ -1,6 +1,6 @@
 # Script de Deploy do INBCM
 
-Este script foi criado para facilitar o deploy do INBCM. Ele é capaz de clonar os repositórios necessários, criar os containers e subir a aplicação.
+Este script foi criado para facilitar o deploy do INBCM. Ele é capaz de clonar os repositórios necessários, criar os containers e subir a aplicação, e executa um consumidor de webhook para atualizar a aplicação automaticamente a cada push no repositório.
 
 ## Pré-requisitos
 
@@ -8,7 +8,9 @@ Para garantir o funcionamento correto deste script, a máquina onde será realiz
 
 - A máquina deve ser acessível via internet.
 - As portas 80 (TCP) e 443 (TCP e UDP) devem estar liberadas.
-- É necessáio um domínio válido apontando a máquina onde será realizado o deploy.
+- É necessáio um domínio válido apontando a máquina onde será realizado o deploy. Além do dominio principal, é necessário os sequintes subdomínios:
+  - admin (admin.seudominio.com)
+  - traefik (traefik.seudominio.com)
 
 ### Instalações Necessárias
 
@@ -56,6 +58,7 @@ Antes de executar o script, é necessário configurar algumas variáveis de ambi
 
 - `DOMAIN`: Domínio que será utilizado para acessar a aplicação.
 - `EMAIL`: E-mail que será utilizado para gerar o certificado SSL.
+- `GITHUB_SECRET`: Token para o webhook do GitHub.
 
 Você pode salvar essas variáveis em um arquivo `.env` na raiz do projeto. Ou difini-las de maneira tradicional via terminal.
 
@@ -88,6 +91,7 @@ Verificar se a configuração SSH está correta.
 Criar a rede Docker traefik.
 Subir os containers iniciais com Docker Compose.
 Clonar os repositórios necessários e construir os containers para cada um.
+Subir o dashboard do Traefik.
 
 Após a execução do script, é esperado que a aplicação INBCM estará em execução e acessível através dos seguintes endereços:
 

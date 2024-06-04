@@ -1,0 +1,12 @@
+{
+  "name": "inbcm-deploy-script",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webkook.js",
+  "scripts": {
+    "start": "node webkook.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
